@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cat index{% endblock %}
+
+{% block body %}
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>IsAdoptable</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        <img src="https://cataas.com/cat/says/{{randcat}}" class="img-fluid" alt="Responsive image">
+        {% for cat in cats %}
+            <tr>
+                <td>{{ cat.id }}</td>
+                <td>{{ cat.name }}</td>
+                <td>{{ cat.age }}</td>
+                <td>{{ cat.isAdoptable ? 'Yes' : 'No' }}</td>
+                <td>
+
+
+                    <a href="{{ path('app_cat_show', {'id': cat.id}) }}">show</a>
+                    <a href="{{ path('app_cat_edit', {'id': cat.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cat_new') }}">Create new</a>
+{% endblock %}
